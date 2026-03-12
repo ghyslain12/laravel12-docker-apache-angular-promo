@@ -72,13 +72,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Install Angular dependencies
         run: npm ci
         working-directory: ./project/resources/crud-angular
+
       - name: Run Angular tests
         run: npm test -- --watch=false --browsers=ChromeHeadless
         working-directory: ./project/resources/crud-angular
